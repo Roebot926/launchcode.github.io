@@ -4,6 +4,13 @@ class Rover {
       this.mode = mode;
       this.generatorWatts = generatorWatts;
     }
+
+    receiveMessage(message){
+      let response = {
+         message: message,
+      };
+      return response
+    }
 }
 
 module.exports = Rover;
