@@ -12,15 +12,21 @@ class Rover {
       };
 
       for(let i=0; i<message.commands.length; i++){
-         response.results.push(message.commands[i])
 
          if (message.commands[i].commandType === 'STATUS_CHECK'){
-            response.results.push({completed: true, statusRover: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}})
+            response.results.push({completed: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}});
          }else if (message.commands[i].commandType === 'MODE_CHANGE'){
-            response.results.push({completed: true})
-
+            this.mode = message.commands[i].value
+            response.results.push({completed: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}});
+         }else if (message.commands[i].commandType === 'MOVE'){
+            if(this.mode === 'LOW_POWER'){
+               response.results.push({completed: false, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}});
+            }else {//MAKE THIS MAKE SENSE line 25
+               this.position = message.commands[i].value
+               response.results.push({completed: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position }});
+            }
          }
-
+         
       }
 
       return response
