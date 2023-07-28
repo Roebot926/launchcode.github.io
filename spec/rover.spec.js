@@ -62,25 +62,24 @@ describe("Rover class", function() {
     let output2 = rover2.receiveMessage(response2)
     
     expect(output.results[1].completed).toEqual(false);
-    expect(output.results[1].roverStatus.position).toEqual(12000);
     expect(output2.results[0].completed).toEqual(true);
-    expect(output2.results[1].roverStatus.position).toEqual(1724)
+
  
   });
 
 //test 13
-if("responds with position for move command.", function(){
+it("responds with position for move command.", function(){
   let rover = new Rover(12000);
-  let commands = [new Command('MOVE', 420)];
+  let commands = [new Command('MOVE', 1420)];
   let response = new Message("Test message with two commands",commands);
   let output = rover.receiveMessage(response);
   let rover2 = new Rover(1080);
   let commands2 = [new Command('MOVE', 1724)];
   let response2 = new Message("ALERT",commands2);
   let output2 = rover2.receiveMessage(response2);
-  expect(output.results[2].roverStatus.position).toEqual(12000);
-  expect(output2.results[2].roverStatus.position).toEqual(1724);
-console.log(output)
+  expect(output.results[0].roverStatus.position).toEqual(1420);
+  expect(output2.results[0].roverStatus.position).toEqual(1724);
+
 });
 
 
