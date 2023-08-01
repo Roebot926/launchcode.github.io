@@ -21,7 +21,7 @@ class Rover {
          }else if (message.commands[i].commandType === 'MOVE'){
             if(this.mode === 'LOW_POWER'){
                response.results.push({completed: false, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}});
-            }else {//MAKE THIS MAKE SENSE line 25
+            }else {
                this.position = message.commands[i].value
                response.results.push({completed: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position }});
             }
@@ -34,6 +34,3 @@ class Rover {
 }
 
 module.exports = Rover;
-
-
-//{completed: true, roverStatus: {mode: 'NORMAL', generatorWatts: 110, position: 87382098}} Values for mode, generatorWatts, position 
